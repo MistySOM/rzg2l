@@ -1,7 +1,7 @@
 
 # README
 
-## VerifiesLinuxPackage_v3.0.0
+## VerifiedLinuxPackage_v3.0.0
 
 ### Description
 
