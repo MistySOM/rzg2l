@@ -10,7 +10,7 @@ usage() {
 }
 #OUTDIR is bind mopunted and will contain the compiled output from the container
 OUTDIR='output'
-CONTNAME="rzv2l_vlp_v3.0.0"
+CONTNAME="rzg2l_vlp_v3.0.0"
 str="$*"
 if [[ $str == *"-d"* ]];
 then
@@ -54,8 +54,8 @@ fi
 	chmod 777 ${OUTDIR}
 if [ -z "${DPATH}" ]; 
 then
-  /usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzv_vlp_v3.0.0/out ${CONTNAME}
+  /usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out ${CONTNAME}
 else
 	chmod 777 ${DPATH}
-	/usr/bin/docker run --privileged -it -v "${PWD}/${OUTDIR}":/home/yocto/rzv_vlp_v3.0.0/out -v "$DPATH":/home/yocto/rzv_vlp_v3.0.0/build/downloads -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} ${CONTNAME}
+	/usr/bin/docker run --privileged -it -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out -v "$DPATH":/home/yocto/rzg_vlp_v3.0.0/build/downloads -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} ${CONTNAME}
 fi

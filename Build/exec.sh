@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -e
+set -e
 #Check hostname is a hexadecimal number of 12 
 hname=`hostname | egrep -o '^[0-9a-f]{12}\b'`
 echo $hname
@@ -23,8 +23,8 @@ then
 		bitbake core-image-weston
 		bitbake core-image-weston -c populate_sdk
 	fi
-	echo "copying compiled images & SDK directory into 'out/'"
-	cp -r /home/yocto/rzv_vlp_v3.0.0/build/tmp/deploy/ /home/yocto/rzv_vlp_v3.0.0/out/
+	echo "copying compiled images directory into 'out/'"
+	cp -r /home/yocto/rzg_vlp_v3.0.0/build/tmp/deploy/ /home/yocto/rzg_vlp_v3.0.0/out/
 else
 	/bin/bash
 fi
