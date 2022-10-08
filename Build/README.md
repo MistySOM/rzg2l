@@ -10,6 +10,14 @@ Builds Yocto kernel, device tree, rootfs and the SDK (when `-e` is submitted to 
 
 ### Usage
 
+#### User & credentials
+
+The hardcoded default user and password in the container are:
+
+user: `yocto`<br>
+pass: `yocto`<br>
+`sudo` is installed and the user has been added to the `sudoers`
+
 #### build.sh
 
 Execute the script `./build.sh`  to build the OCI container image.
