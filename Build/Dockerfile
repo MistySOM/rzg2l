@@ -11,7 +11,7 @@ RUN apt-get -y install gawk wget git-core diffstat unzip texinfo \
 	     	       python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 \
 	     	       xterm p7zip-full libyaml-dev screen ncurses-bin libncurses-dev \
 		       device-tree-compiler locales vim git findutils exuberant-ctags \
-		       cscope
+		       cscope tmux sudo
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 ENV LANG en_US.UTF-8
@@ -19,6 +19,8 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 #create user yocto
 RUN useradd -m yocto -s /bin/bash
+RUN echo yocto:yocto | chpasswd
+RUN usermod -aG sudo yocto
 WORKDIR /home/yocto
 #COPY files 
 RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3.0.0/RTK0EF0045Z0021AZJ-v3.0.0-update2.zip
