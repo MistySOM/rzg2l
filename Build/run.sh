@@ -3,7 +3,7 @@
 
 usage() {
     echo "    Usage:
-    $ $0 -d|--dpath : path to download cache
+    $ $0 -c|--cpath : path to local cache (download & sstate)
     $ $0 -n|--no : starts container but does not invoke bitbake
     $ $0 -s|--sdk : start in developer mode, 
                     invokes building of SDK"
@@ -12,7 +12,7 @@ usage() {
 OUTDIR='output'
 CONTNAME="rzg2l_vlp_v3.0.0"
 str="$*"
-if [[ $str == *"-d"* ]];
+if [[ $str == *"-c"* ]];
 then
   if [ $# -lt 2 ]
   then
@@ -23,8 +23,8 @@ then
 fi
 while [[ $# -gt 0 ]]; do
     case $1 in
-      -d|--dpath)
-        DPATH="$2"
+      -c|--cpath)
+        CPATH="$2"
 	DLOAD="1"
         shift #past argument
         shift #past value
@@ -52,10 +52,19 @@ then
 	mkdir ${OUTDIR}
 fi
 	chmod 777 ${OUTDIR}
-if [ -z "${DPATH}" ]; 
+if [ -z "${CPATH}" ]; 
 then
   /usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out ${CONTNAME}
 else
-	chmod 777 ${DPATH}
-	/usr/bin/docker run --privileged -it -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out -v "$DPATH":/home/yocto/rzg_vlp_v3.0.0/build/downloads -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} ${CONTNAME}
+	chmod 777 ${CPATH}
+#Create CPATH sub directories if they do not exist
+	if [ ! -d "${CPATH}/downloads" ];
+	then
+		mkdir ${CPATH}/downloads
+	fi
+	if [ ! -d "${CPATH}/sstate-cache" ];
+	then
+		mkdir ${CPATH}/sstate-cache
+	fi
+	/usr/bin/docker run --privileged -it -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out -v "${CPATH}/downloads":/home/yocto/rzg_vlp_v3.0.0/build/downloads -v "${CPATH}/sstate-cache":/home/yocto/rzg_vlp_v3.0.0/build/sstate-cache -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} ${CONTNAME}
 fi
