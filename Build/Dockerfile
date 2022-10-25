@@ -27,17 +27,12 @@ RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3
 RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3.0.0/RTK0EF0045Z13001ZJ-v1.2_EN.zip
 RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3.0.0/RTK0EF0045Z15001ZJ-v0.58_EN.zip
 RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3.0.0/oss_pkg_v3.0.0.7z
-#RUN wget https://remote.mistywest.io/download/mh11-vlp3.0.0/rzg2l/rzg_bsp_v3.0.0.tar.gz
-#RUN wget https://remote.mistywest.io/download/mh11-vlp3.0.0/rzg2l/rzg_bsp_v3.0.0.tar.gz
-#RUN wget https://remote.mistywest.io/download/mh11-vlp3.0.0/RTK0EF0045Z13001ZJ-v1.2_EN.zip
-#RUN wget https://remote.mistywest.io/download/mh11-vlp3.0.0/RTK0EF0045Z14001ZJ-v1.2_EN.zip
-#RUN wget https://remote.mistywest.io/download/mh11-vlp3.0.0/RTK0EF0045Z15001ZJ-v0.58_EN.zip
-#RUN wget https://remote.mistywest.io/download/mh11-vlp3.0.0/RTK0EF0045Z0024AZJ-v3.0.0-update2.zip
 COPY start.sh /home/yocto/
 COPY exec.sh /home/yocto/
 COPY get_fragments.sh /home/yocto/rzg_vlp_v3.0.0/
 COPY mw_fragments/*.cfg /home/yocto/rzg_vlp_v3.0.0/mw_fragments/
 RUN chown yocto:yocto -R /home/yocto/
+RUN apt-get -y install tree
 USER yocto
 RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/build/downloads
 RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/out

@@ -5,7 +5,7 @@
 
 ### Description
 
-Yocto build container with external download cache.
+Yocto build container with external download & build fragment cache.
 Builds Yocto kernel, device tree, rootfs and the SDK (when `-e` is submitted to the `./run.sh` script)with Mali GPU driver & video codec.
 
 ### Usage
@@ -26,12 +26,12 @@ Execute the script `./build.sh`  to build the OCI container image.
 
 Upon completion of the build script, start the container by execution of the `run.sh` script to invoke the build of images. It can be supplied with arguments: 
 
-- The `run.sh` script can be supplied with an external path to a directory with `-d /path/to/dir` or `--dpath /path/to/dir` where the Yocto downloads can be cached (it requires about 7.3GB of empty space as of 10/04/2022) so that they do not need to be re-downloaded for every container run (just resubmit the same path).  To allow the container to cache the data, the target directory needs to be writeable by uid and gid 1000 (which is the default user id  & group id of the first user on a Linux system, confirm with `id -u`& `id -g`).
-- When no download path is submitted, the container will build the binaries in offline mode, utilizing the data & files that have been downloaded during the container build.   
+- The `run.sh` script can be supplied with an external path to a directory with `-c /path/to/dir` or `--cpath /path/to/dir` where the Yocto downloads & build fragments can be cached (it requires about 7.3GB of available space (as of 10/10/2022) so that they do not need to be re-downloaded for every container run (just resubmit the same path).  To allow the container to cache the data, the target directory needs to be writeable by uid and gid 1000 (which is the default user id  & group id of the first user on a Linux system, confirm with `id -u`& `id -g`).
+- When no download path is submitted, the container will build the binaries in offline mode, utilizing the data & files that have been downloaded during the container build.  
 
 | Arg | Description |
 |-----|-------------|
-| `-d` `--dpath` `DIRECTORY`| Path to download cache directory
+| `-c` `--cpath` `DIRECTORY`| Path to the cache directory
 | `-n` `--no` | Container will start, setup the environment but not auto issue a build but instead start a dev shell |
 | `-s` `--sdk` | Container will build the SDK |
 
