@@ -54,9 +54,10 @@ fi
 	chmod 777 ${OUTDIR}
 if [ -z "${CPATH}" ]; 
 then
-  /usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out ${CONTNAME}
+	chmod -R 777 ${CPATH}
+	/usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out ${CONTNAME}
 else
-	chmod 777 ${CPATH}
+	chmod -R 777 ${CPATH}
 #Create CPATH sub directories if they do not exist
 	if [ ! -d "${CPATH}/downloads" ];
 	then
