@@ -20,12 +20,12 @@ then
 	then
 		time bitbake core-image-weston
 		echo "copying compiled images into 'out/'"
-		cp -r /home/yocto/rzv_vlp_v3.0.0/build/tmp/deploy/images/ /home/yocto/rzv_vlp_v3.0.0/out/
+		cp -r /home/yocto/rzg_vlp_v3.0.0/build/tmp/deploy/images/ /home/yocto/rzg_vlp_v3.0.0/out/
 	else
 		time sh -c "bitbake core-image-weston && bitbake core-image-weston -c populate_sdk"
 		echo "copying compiled images & SDK directories into 'out/'"
-		cp -r /home/yocto/rzv_vlp_v3.0.0/build/tmp/deploy/sdk/ /home/yocto/rzv_vlp_v3.0.0/out/
-		cp -r /home/yocto/rzv_vlp_v3.0.0/build/tmp/deploy/images/ /home/yocto/rzv_vlp_v3.0.0/out/
+		cp -r /home/yocto/rzg_vlp_v3.0.0/build/tmp/deploy/sdk/ /home/yocto/rzg_vlp_v3.0.0/out/
+		cp -r /home/yocto/rzg_vlp_v3.0.0/build/tmp/deploy/images/ /home/yocto/rzg_vlp_v3.0.0/out/
 	fi
 else
 	/bin/bash

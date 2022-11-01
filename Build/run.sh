@@ -54,11 +54,11 @@ fi
 	chmod 777 ${OUTDIR}
 if [ -z "${CPATH}" ]; 
 then
-	chmod -R 777 ${CPATH}
+	chmod 777 ${CPATH}/downloads
+	chmod 777 ${CPATH}/sstate-cache
 	/usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out ${CONTNAME}
 else
-	chmod -R 777 ${CPATH}
-#Create CPATH sub directories if they do not exist
+	#Create CPATH sub directories if they do not exist
 	if [ ! -d "${CPATH}/downloads" ];
 	then
 		mkdir ${CPATH}/downloads
@@ -67,5 +67,7 @@ else
 	then
 		mkdir ${CPATH}/sstate-cache
 	fi
+	chmod 777 ${CPATH}/downloads
+	chmod 777 ${CPATH}/sstate-cache
 	/usr/bin/docker run --privileged -it -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out -v "${CPATH}/downloads":/home/yocto/rzg_vlp_v3.0.0/build/downloads -v "${CPATH}/sstate-cache":/home/yocto/rzg_vlp_v3.0.0/build/sstate-cache -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} ${CONTNAME}
 fi
