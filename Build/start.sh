@@ -20,13 +20,13 @@ if [[ ! -e $WORK ]]; then #Check if dir already exists
 fi
 cd $WORK
 unzip ~/RTK0EF0045Z0021AZJ-v3.0.0-update2.zip
-tar zxvf ./RTK0EF0045Z0021AZJ-v3.0.0-update2/rzg_bsp_v3.0.0.tar.gz
+tar zxf ./RTK0EF0045Z0021AZJ-v3.0.0-update2/rzg_bsp_v3.0.0.tar.gz
 cd $WORK
 unzip ~/RTK0EF0045Z13001ZJ-v1.2_EN.zip
-tar zxvf ./RTK0EF0045Z13001ZJ-v1.2_EN/meta-rz-features.tar.gz
+tar zxf ./RTK0EF0045Z13001ZJ-v1.2_EN/meta-rz-features.tar.gz
 cd $WORK
 unzip ~/RTK0EF0045Z15001ZJ-v0.58_EN.zip
-tar zxvf ./RTK0EF0045Z15001ZJ-v0.58_EN/meta-rz-features.tar.gz
+tar zxf ./RTK0EF0045Z15001ZJ-v0.58_EN/meta-rz-features.tar.gz
 cd $WORK
 source poky/oe-init-build-env
 cd $WORK/build
@@ -54,7 +54,11 @@ if [ -z $DLOAD ];
 then
 	sed -i 's/BB_NO_NETWORK = "0"/BB_NO_NETWORK = "1"/g' ${LOCALCONF}
 fi
+#addition of meta-mistysom layer to bblayers.conf
+sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
 ##Add installation of Python to local.conf
+#echo "IMAGE_INSTALL_append = \" usbutils\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
+#echo "IMAGE_INSTALL_append = \" usbutils-python\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
 echo "IMAGE_INSTALL_append = \" python3\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
 echo "IMAGE_INSTALL_append = \" python3-datetime\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
 echo "IMAGE_INSTALL_append = \" python3-io\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
@@ -72,6 +76,6 @@ echo "    ------------------------------------------------
     run the following commands to start the build:
     'cd ~/rzg_vlp_v3.0.0/'
     'source poky/oe-init-build-env'
-    'bitbake core-image-weston'"
+    'bitbake mistysom-image'"
 cd ~/rzg_vlp_v3.0.0
 
