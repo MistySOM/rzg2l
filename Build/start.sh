@@ -59,11 +59,11 @@ sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' /home/yocto/rzg_vlp_
 ##Add installation of Python to local.conf
 #echo "IMAGE_INSTALL_append = \" usbutils\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
 #echo "IMAGE_INSTALL_append = \" usbutils-python\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
-echo "IMAGE_INSTALL_append = \" python3\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
-echo "IMAGE_INSTALL_append = \" python3-datetime\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
-echo "IMAGE_INSTALL_append = \" python3-io\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
-echo "IMAGE_INSTALL_append = \" python3-core\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
-echo "IMAGE_INSTALL_append = \" python3-multiprocessing\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
+#echo "IMAGE_INSTALL_append = \" python3\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
+#echo "IMAGE_INSTALL_append = \" python3-datetime\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
+#echo "IMAGE_INSTALL_append = \" python3-io\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
+#echo "IMAGE_INSTALL_append = \" python3-core\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
+#echo "IMAGE_INSTALL_append = \" python3-multiprocessing\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
 
 #Add kconfig fragments to bb recipe
 cd ~/rzg_vlp_v3.0.0/
