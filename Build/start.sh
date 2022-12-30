@@ -56,6 +56,8 @@ then
 fi
 #addition of meta-mistysom layer to bblayers.conf
 sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
+#meta-mistysom installs xrandr  which needs x11 to be installed - fix in local.conf
+sed -i 's/DISTRO_FEATURES_remove = \" x11\"/DISTRO_FEATURES_append = \" x11\"/'  ${LOCALCONF}
 ##Add installation of Python to local.conf
 #echo "IMAGE_INSTALL_append = \" usbutils\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
 #echo "IMAGE_INSTALL_append = \" usbutils-python\"">> /home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf
