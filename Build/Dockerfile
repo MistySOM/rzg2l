@@ -32,7 +32,7 @@ COPY exec.sh /home/yocto/
 COPY get_fragments.sh /home/yocto/rzg_vlp_v3.0.0/
 COPY mw_fragments/*.cfg /home/yocto/rzg_vlp_v3.0.0/mw_fragments/
 RUN chown yocto:yocto -R /home/yocto/
-RUN apt-get -y install tree libssl-dev gcc-aarch64-linux-gnu
+RUN apt-get -y install tree
 USER yocto
 RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/build/downloads
 RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/out
