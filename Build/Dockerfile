@@ -36,5 +36,8 @@ RUN apt-get -y install tree
 USER yocto
 RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/build/downloads
 RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/out
+# copy mist-som layer from the submodule 
+COPY meta-mistysom /home/yocto/rzg_vlp_v3.0.0/meta-mistysom
+
 WORKDIR /home/yocto
 CMD ["/home/yocto/exec.sh"]

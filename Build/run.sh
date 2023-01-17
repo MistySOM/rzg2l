@@ -11,6 +11,7 @@ usage() {
 #OUTDIR is bind mopunted and will contain the compiled output from the container
 OUTDIR='output'
 CONTNAME="rzg2l_vlp_v3.0.0"
+MPU="rzg2l"
 str="$*"
 if [[ $str == *"-c"* ]];
 then
@@ -55,7 +56,7 @@ fi
 if [ -z "${CPATH}" ]; 
 then
 	chmod 777 ${CPATH}/downloads
-	chmod 777 ${CPATH}/sstate-cache
+	chmod 777 ${CPATH}/sstate-cache/${MPU}
 	/usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out ${CONTNAME}
 else
 	#Create CPATH sub directories if they do not exist
@@ -63,11 +64,11 @@ else
 	then
 		mkdir ${CPATH}/downloads
 	fi
-	if [ ! -d "${CPATH}/sstate-cache" ];
+	if [ ! -d "${CPATH}/sstate-cache/${MPU}" ];
 	then
-		mkdir ${CPATH}/sstate-cache
+		mkdir ${CPATH}/sstate-cache/${MPU}
 	fi
 	chmod 777 ${CPATH}/downloads
-	chmod 777 ${CPATH}/sstate-cache
-	/usr/bin/docker run --privileged -it -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out -v "${CPATH}/downloads":/home/yocto/rzg_vlp_v3.0.0/build/downloads -v "${CPATH}/sstate-cache":/home/yocto/rzg_vlp_v3.0.0/build/sstate-cache -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} ${CONTNAME}
+	chmod 777 ${CPATH}/sstate-cache/${MPU}
+	/usr/bin/docker run --privileged -it -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out -v "${CPATH}/downloads":/home/yocto/rzg_vlp_v3.0.0/build/downloads -v "${CPATH}/sstate-cache/${MPU}/":/home/yocto/rzg_vlp_v3.0.0/build/sstate-cache -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} ${CONTNAME}
 fi
