@@ -56,6 +56,9 @@ then
 fi
 #addition of meta-mistysom layer to bblayers.conf
 sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
+#meta-mistysom installs xrandr  which needs x11 to be installed - fix in local.conf
+sed -i 's/DISTRO_FEATURES_remove = \" x11\"/DISTRO_FEATURES_append = \" x11\"/'  ${LOCALCONF}
+sed -i 's/DISTRO_FEATURES_append = \" wayland\"/DISTRO_FEATURES_remove = \" wayland\"/'  ${LOCALCONF}
 
 #Add kconfig fragments to bb recipe
 cd ~/rzg_vlp_v3.0.0/
