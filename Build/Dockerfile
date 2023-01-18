@@ -38,6 +38,7 @@ RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/build/downloads
 RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/out
 # copy mist-som layer from the submodule 
 COPY meta-mistysom /home/yocto/rzg_vlp_v3.0.0/meta-mistysom
+COPY meta-mistylwb5p/ /home/yocto/rzg_vlp_v3.0.0/meta-mistylwb5p
 
 WORKDIR /home/yocto
 CMD ["/home/yocto/exec.sh"]
