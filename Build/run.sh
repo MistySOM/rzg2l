@@ -10,7 +10,7 @@ usage() {
 }
 #OUTDIR is bind mopunted and will contain the compiled output from the container
 OUTDIR='output'
-CONTNAME="rzg2l_vlp_v3.0.0"
+CONTNAME="$(whoami)-rzg2l_vlp_v3.0.0"
 MPU="rzg2l"
 str="$*"
 if [[ $str == *"-c"* ]];
