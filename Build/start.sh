@@ -62,6 +62,9 @@ BBMASK += " \\
             meta-laird-cp-pre-3.4/recipes-packages/openssl \\
             meta-laird-cp-pre-3.4/recipes-packages/.*/.*openssl10.* \\
 "
+PREFERRED_RPROVIDER_wpa-supplicant = "sterling-supplicant"
+PREFERRED_RPROVIDER_wpa-supplicant-cli = "sterling-supplicant"
+PREFERRED_RPROVIDER_wpa-supplicant-passphrase = "sterling-supplicant"
 PREFERRED_RPROVIDER_wireless-regdb-static = "wireless-regdb"
 
 EOT
