@@ -57,7 +57,7 @@ if [ -z "${CPATH}" ];
 then
 	chmod 777 ${CPATH}/downloads
 	chmod 777 ${CPATH}/sstate-cache/${MPU}
-	/usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out ${CONTNAME}
+	/usr/bin/docker run --privileged -it --rm -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out --name ${CONTNAME} ${CONTNAME}
 else
 	#Create CPATH sub directories if they do not exist
 	if [ ! -d "${CPATH}/downloads" ];
