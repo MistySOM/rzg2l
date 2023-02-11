@@ -15,5 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Build the Docker image
-      run: cd Build
-           ./build.sh
+      run: Build/build.sh
