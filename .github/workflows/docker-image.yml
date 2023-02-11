@@ -4,16 +4,16 @@ on:
   workflow_dispatch:
   push:
     branches: 
-    - CI/CD
+    - ci_cd
   pull_request:
     branches:
-    - CI/CD
+    - ci_cd
 jobs:
   test:
     name: builds container
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@CI/CD
+    - uses: actions/checkout@ci_cd
     - name: Build the Docker image
       run: cd Build && ./build.sh -n; ./run.sh -s;
       
