@@ -4,18 +4,18 @@ on:
   workflow_dispatch:
   push:
     branches: 
-    - master
+    - develop
   pull_request:
     branches:
-    - master
+    - develop
 jobs:
   test:
     name: builds container
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@CI/CD
     - name: Build the Docker image
-      run: cd Build && ./build.sh; ./run.sh -s;
+      run: cd Build && ./build.sh -n; ./run.sh -s;
       
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
