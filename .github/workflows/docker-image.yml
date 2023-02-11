@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches: 
-    - develop
+    - CI/CD
   pull_request:
     branches:
-    - develop
+    - CI/CD
 jobs:
   test:
     name: builds container
