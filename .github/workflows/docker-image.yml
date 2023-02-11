@@ -1,0 +1,19 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+    - master
+  pull_request:
+    branches:
+    - master
+jobs:
+  test:
+    name: builds container
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Build the Docker image
+      run: cd Build
+           ./build.sh
