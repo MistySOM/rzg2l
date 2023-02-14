@@ -1,5 +1,3 @@
 [submodule "Build/meta-mistysom"]
 	path = Build/meta-mistysom
-	url = https://github.com/MistySOM/meta-mistysom.git
-[submodule "meta-mistysom"]
 	branch = mistysom-io

@@ -1,7 +1,7 @@
 #!/bin/bash
 FRAG_DIR="mw_fragments/" #specifies relaTIVE directory PATH that contains the config fragments
 CURR_DIR=$(pwd)
-#Generates a list of fragemnt files inside $FRAG_DIR
+#Generates a list of fragment files inside $FRAG_DIR
 FRAGMENTLIST=(`ls ${CURR_DIR}/${FRAG_DIR}/*.cfg`)
 #Loop over files in list and print content to add to bitbake recipe
         echo "SRC_URI_append = \" \\"
