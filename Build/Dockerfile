@@ -29,8 +29,6 @@ RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3
 RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3.0.0/oss_pkg_v3.0.0.7z
 COPY start.sh /home/yocto/
 COPY exec.sh /home/yocto/
-COPY get_fragments.sh /home/yocto/rzg_vlp_v3.0.0/
-COPY mw_fragments/*.cfg /home/yocto/rzg_vlp_v3.0.0/mw_fragments/
 RUN chown yocto:yocto -R /home/yocto/
 RUN apt-get -y install tree
 USER yocto

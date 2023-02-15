@@ -19,13 +19,13 @@ if [[ ! -e $WORK ]]; then #Check if dir already exists
 	mkdir $WORK #if not, create it
 fi
 cd $WORK
-unzip ~/RTK0EF0045Z0021AZJ-v3.0.0-update2.zip
+unzip -o ~/RTK0EF0045Z0021AZJ-v3.0.0-update2.zip
 tar zxf ./RTK0EF0045Z0021AZJ-v3.0.0-update2/rzg_bsp_v3.0.0.tar.gz
 cd $WORK
-unzip ~/RTK0EF0045Z13001ZJ-v1.2_EN.zip
+unzip -o ~/RTK0EF0045Z13001ZJ-v1.2_EN.zip
 tar zxf ./RTK0EF0045Z13001ZJ-v1.2_EN/meta-rz-features.tar.gz
 cd $WORK
-unzip ~/RTK0EF0045Z15001ZJ-v0.58_EN.zip
+unzip -o ~/RTK0EF0045Z15001ZJ-v0.58_EN.zip
 tar zxf ./RTK0EF0045Z15001ZJ-v0.58_EN/meta-rz-features.tar.gz
 cd $WORK
 source poky/oe-init-build-env
@@ -56,12 +56,6 @@ then
 fi
 #addition of meta-mistysom layer to bblayers.conf
 sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
-
-#Add kconfig fragments to bb recipe
-cd ~/rzg_vlp_v3.0.0/
-FRAG=$(./get_fragments.sh)
-echo "$FRAG" >> ~/rzg_vlp_v3.0.0/meta-renesas/recipes-common/recipes-kernel/linux/linux-renesas_5.10.bb
-cp ~/rzg_vlp_v3.0.0/mw_fragments/* ~/rzg_vlp_v3.0.0/meta-renesas/recipes-common/recipes-kernel/linux/linux-renesas/
 
 echo "    ------------------------------------------------
     SETUP SCRIPT BUILD ENVIRONMENT SETUP SUCCESSFUL!
