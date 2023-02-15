@@ -57,12 +57,6 @@ fi
 #addition of meta-mistysom layer to bblayers.conf
 sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
 
-#Add kconfig fragments to bb recipe
-cd ~/rzg_vlp_v3.0.0/
-FRAG=$(./get_fragments.sh)
-echo "$FRAG" >> ~/rzg_vlp_v3.0.0/meta-renesas/recipes-common/recipes-kernel/linux/linux-renesas_5.10.bb
-cp ~/rzg_vlp_v3.0.0/mw_fragments/* ~/rzg_vlp_v3.0.0/meta-renesas/recipes-common/recipes-kernel/linux/linux-renesas/
-
 echo "    ------------------------------------------------
     SETUP SCRIPT BUILD ENVIRONMENT SETUP SUCCESSFUL!
     run the following commands to start the build:
