@@ -19,13 +19,13 @@ if [[ ! -e $WORK ]]; then #Check if dir already exists
 	mkdir $WORK #if not, create it
 fi
 cd $WORK
-unzip ~/RTK0EF0045Z0021AZJ-v3.0.0-update2.zip
+unzip -o ~/RTK0EF0045Z0021AZJ-v3.0.0-update2.zip
 tar zxf ./RTK0EF0045Z0021AZJ-v3.0.0-update2/rzg_bsp_v3.0.0.tar.gz
 cd $WORK
-unzip ~/RTK0EF0045Z13001ZJ-v1.2_EN.zip
+unzip -o ~/RTK0EF0045Z13001ZJ-v1.2_EN.zip
 tar zxf ./RTK0EF0045Z13001ZJ-v1.2_EN/meta-rz-features.tar.gz
 cd $WORK
-unzip ~/RTK0EF0045Z15001ZJ-v0.58_EN.zip
+unzip -o ~/RTK0EF0045Z15001ZJ-v0.58_EN.zip
 tar zxf ./RTK0EF0045Z15001ZJ-v0.58_EN/meta-rz-features.tar.gz
 cd $WORK
 source poky/oe-init-build-env
