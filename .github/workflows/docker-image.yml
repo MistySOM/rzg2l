@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+    - ci_cd
+  pull_request:
+    branches:
+    - ci_cd
+jobs:
+  test:
+    name: builds container
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@ci_cd
+    - name: Build the Docker image
+      run: cd Build && ./build.sh -n; ./run.sh -s;
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-output-files
+        path: |
+          Output/Image-smarc-rzv2l.bin
+          Output/r9a07g044l2-smarc.dtb
+          Output/mistysom-image-smarc-rzg2l.tar.bz2
+      
