@@ -3,6 +3,7 @@
 
 usage() {
     echo "    Usage:
+    $ $0 -b|--brach : attach current branch name when running the container
     $ $0 -c|--cpath : path to local cache (download & sstate)
     $ $0 -n|--no : starts container but does not invoke bitbake
     $ $0 -s|--sdk : start in developer mode, 
@@ -10,7 +11,6 @@ usage() {
 }
 #OUTDIR is bind mopunted and will contain the compiled output from the container
 OUTDIR='output'
-CONTNAME="$(whoami)-rzg2l_vlp_v3.0.0"
 MPU="rzg2l"
 str="$*"
 if [[ $str == *"-c"* ]];
@@ -24,6 +24,10 @@ then
 fi
 while [[ $# -gt 0 ]]; do
     case $1 in
+      -b|--branch)
+        BRANCH="1"
+        shift #past argument
+      ;;
       -c|--cpath)
         CPATH="$2"
 	DLOAD="1"
@@ -33,12 +37,10 @@ while [[ $# -gt 0 ]]; do
       -n|--no)
         NO="1"
         shift #past argument
-        shift #past value
       ;;
       -s|--sdk)
         SDK="1"
         shift #past argument
-        shift #past value
       ;;
       -*|--*)
         echo "Unknown argument $1"
@@ -47,6 +49,12 @@ while [[ $# -gt 0 ]]; do
         ;;
     esac
 done
+if [ "$BRANCH" == "1" ];
+then
+	CONTNAME="$(whoami)-rzg2l_vlp_v3.0.0_$(git branch --show-current)"
+else
+	CONTNAME="$(whoami)-rzg2l_vlp_v3.0.0"
+fi
 #Create OUTDIR if iot doesn't exist
 if [ ! -d "${OUTDIR}" ];
 then
@@ -55,9 +63,7 @@ fi
 	chmod 777 ${OUTDIR}
 if [ -z "${CPATH}" ]; 
 then
-	chmod 777 ${CPATH}/downloads
-	chmod 777 ${CPATH}/sstate-cache/${MPU}
-	/usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out ${CONTNAME}
+		/usr/bin/docker run --privileged -it -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out ${CONTNAME}
 else
 	#Create CPATH sub directories if they do not exist
 	if [ ! -d "${CPATH}/downloads" ];
