@@ -2,6 +2,7 @@
 set -e
 #Check hostname is a hexadecimal number of 12 
 LOCALCONF="/home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf"
+YOCTODIR="/home/yocto/rzg_vlp_v3.0.0/"
 hname=`hostname | egrep -o '^[0-9a-f]{12}\b'`
 echo $hname
 len=${#hname}
@@ -56,6 +57,10 @@ then
 fi
 #addition of meta-mistysom layer to bblayers.conf
 sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
+
+# add dunfell compatibility to layers wehre they're missing to avoid WARNING
+echo "LAYERSERIES_COMPAT_qt5-layer = \"dunfell\"" >> ${YOCTODIR}/meta-qt5/conf/layer.conf
+echo "LAYERSERIES_COMPAT_rz-features = \"dunfell\"" >> ${YOCTODIR}/meta-rz-features/conf/layer.conf
 
 echo "    ------------------------------------------------
     SETUP SCRIPT BUILD ENVIRONMENT SETUP SUCCESSFUL!
