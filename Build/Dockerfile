@@ -27,10 +27,10 @@ RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3
 RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3.0.0/RTK0EF0045Z13001ZJ-v1.2_EN.zip
 RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3.0.0/RTK0EF0045Z15001ZJ-v0.58_EN.zip
 RUN wget https://remote.mistywest.io/download/mh11/rzg2l/VerifiedLinuxPackage_v3.0.0/oss_pkg_v3.0.0.7z
-COPY start.sh /home/yocto/
+RUN apt-get -y install tree wiggle
 COPY exec.sh /home/yocto/
+COPY start.sh /home/yocto/
 RUN chown yocto:yocto -R /home/yocto/
-RUN apt-get -y install tree
 USER yocto
 RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/build/downloads
 RUN mkdir -p /home/yocto/rzg_vlp_v3.0.0/out
