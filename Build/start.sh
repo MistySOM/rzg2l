@@ -16,18 +16,7 @@ fi
 git config --global user.email "yocto@mistywest.com"
 git config --global user.name "Yocto"
 git config --global url.https://github.com/.insteadOf git://github.com/
-if [[ ! -e $WORK ]]; then #Check if dir already exists
-	mkdir $WORK #if not, create it
-fi
-cd $WORK
-unzip -o ~/RTK0EF0045Z0021AZJ-v3.0.0-update2.zip
-tar zxf ./RTK0EF0045Z0021AZJ-v3.0.0-update2/rzg_bsp_v3.0.0.tar.gz
-cd $WORK
-unzip -o ~/RTK0EF0045Z13001ZJ-v1.2_EN.zip
-tar zxf ./RTK0EF0045Z13001ZJ-v1.2_EN/meta-rz-features.tar.gz
-cd $WORK
-unzip -o ~/RTK0EF0045Z15001ZJ-v0.58_EN.zip
-tar zxf ./RTK0EF0045Z15001ZJ-v0.58_EN/meta-rz-features.tar.gz
+
 cd $WORK
 source poky/oe-init-build-env
 cd $WORK/build
@@ -56,7 +45,7 @@ then
 	sed -i 's/BB_NO_NETWORK = "0"/BB_NO_NETWORK = "1"/g' ${LOCALCONF}
 fi
 #addition of meta-mistysom layer to bblayers.conf
-sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
+sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' ${WORK}/build/conf/bblayers.conf
 
 # add dunfell compatibility to layers wehre they're missing to avoid WARNING
 echo "LAYERSERIES_COMPAT_qt5-layer = \"dunfell\"" >> ${YOCTODIR}/meta-qt5/conf/layer.conf
