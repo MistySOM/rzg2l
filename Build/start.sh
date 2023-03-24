@@ -2,6 +2,7 @@
 set -e
 #Check hostname is a hexadecimal number of 12 
 LOCALCONF="/home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf"
+YOCTODIR="/home/yocto/rzg_vlp_v3.0.0/"
 hname=`hostname | egrep -o '^[0-9a-f]{12}\b'`
 echo $hname
 len=${#hname}
@@ -15,18 +16,7 @@ fi
 git config --global user.email "yocto@mistywest.com"
 git config --global user.name "Yocto"
 git config --global url.https://github.com/.insteadOf git://github.com/
-if [[ ! -e $WORK ]]; then #Check if dir already exists
-	mkdir $WORK #if not, create it
-fi
-cd $WORK
-unzip ~/RTK0EF0045Z0021AZJ-v3.0.0-update2.zip
-tar zxf ./RTK0EF0045Z0021AZJ-v3.0.0-update2/rzg_bsp_v3.0.0.tar.gz
-cd $WORK
-unzip ~/RTK0EF0045Z13001ZJ-v1.2_EN.zip
-tar zxf ./RTK0EF0045Z13001ZJ-v1.2_EN/meta-rz-features.tar.gz
-cd $WORK
-unzip ~/RTK0EF0045Z15001ZJ-v0.58_EN.zip
-tar zxf ./RTK0EF0045Z15001ZJ-v0.58_EN/meta-rz-features.tar.gz
+
 cd $WORK
 source poky/oe-init-build-env
 cd $WORK/build
@@ -55,13 +45,11 @@ then
 	sed -i 's/BB_NO_NETWORK = "0"/BB_NO_NETWORK = "1"/g' ${LOCALCONF}
 fi
 #addition of meta-mistysom layer to bblayers.conf
-sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
+sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' ${WORK}/build/conf/bblayers.conf
 
-#Add kconfig fragments to bb recipe
-cd ~/rzg_vlp_v3.0.0/
-FRAG=$(./get_fragments.sh)
-echo "$FRAG" >> ~/rzg_vlp_v3.0.0/meta-renesas/recipes-common/recipes-kernel/linux/linux-renesas_5.10.bb
-cp ~/rzg_vlp_v3.0.0/mw_fragments/* ~/rzg_vlp_v3.0.0/meta-renesas/recipes-common/recipes-kernel/linux/linux-renesas/
+# add dunfell compatibility to layers wehre they're missing to avoid WARNING
+echo "LAYERSERIES_COMPAT_qt5-layer = \"dunfell\"" >> ${YOCTODIR}/meta-qt5/conf/layer.conf
+echo "LAYERSERIES_COMPAT_rz-features = \"dunfell\"" >> ${YOCTODIR}/meta-rz-features/conf/layer.conf
 
 echo "    ------------------------------------------------
     SETUP SCRIPT BUILD ENVIRONMENT SETUP SUCCESSFUL!

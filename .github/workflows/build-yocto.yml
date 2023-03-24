@@ -1,0 +1,32 @@
+name: Build Yocto Image
+
+on:
+  push:
+    branches: [ "master", "develop" ]
+  pull_request:
+    branches: [ "master", "develop" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    
+jobs:
+  build-yocto:
+    runs-on: self-hosted
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build the Docker image
+      run: cd Build && ./build.sh; 
+    
+    - name: Run the Docker image and build output files with SDK
+      run: cd Build && ./run.sh -c /home/github/rzg2l-cache;
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: output-files
+        path: |
+          Build/output/images/smarc-rzg2l/Image-smarc-rzg2l.bin
+          Build/output/images/smarc-rzg2l/r9a07g044l2-smarc.dtb
+          Build/output/images/smarc-rzg2l/mistysom-image-smarc-rzg2l.tar.bz2
