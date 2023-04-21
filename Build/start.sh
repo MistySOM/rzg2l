@@ -55,12 +55,12 @@ then
 	sed -i 's/BB_NO_NETWORK = "0"/BB_NO_NETWORK = "1"/g' ${LOCALCONF}
 fi
 
-#Add configuration details for Laird LWB5+ module according to: https://github.com/LairdCP/meta-laird-cp/tree/lrd-10.0.0.x/meta-laird-cp-pre-3.4
+#Add configuration details for Laird LWB5+ module according to: https://github.com/LairdCP/meta-summit-radio/tree/lrd-10.0.0.x/meta-summit-radio-pre-3.4
 cat <<EOT >> ${LOCALCONF}
 
 BBMASK += " \\
-            meta-laird-cp-pre-3.4/recipes-packages/openssl \\
-            meta-laird-cp-pre-3.4/recipes-packages/.*/.*openssl10.* \\
+            meta-summit-radio-pre-3.4/recipes-packages/openssl \\
+            meta-summit-radio-pre-3.4/recipes-packages/.*/.*openssl10.* \\
 "
 PREFERRED_RPROVIDER_wpa-supplicant = "sterling-supplicant"
 PREFERRED_RPROVIDER_wpa-supplicant-cli = "sterling-supplicant"
@@ -69,11 +69,7 @@ PREFERRED_RPROVIDER_wireless-regdb-static = "wireless-regdb"
 
 EOT
 #addition of meta-mistysom & mistylwb5p layers to bblayers.conf
-sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\\n  ${TOPDIR}\/..\/meta-mistylwb5p\/meta-laird-cp-pre-3.4 \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
-
-#meta-mistysom installs xrandr  which needs x11 to be installed - fix in local.conf
-sed -i 's/DISTRO_FEATURES_remove = \" x11\"/DISTRO_FEATURES_append = \" x11\"/'  ${LOCALCONF}
-sed -i 's/DISTRO_FEATURES_append = \" wayland\"/DISTRO_FEATURES_remove = \" wayland\"/'  ${LOCALCONF}
+sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\\n  ${TOPDIR}\/..\/meta-mistylwb5p\/meta-summit-radio-pre-3.4 \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
 
 #Add kconfig fragments to bb recipe
 cd ~/rzg_vlp_v3.0.0/
