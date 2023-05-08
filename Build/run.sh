@@ -11,6 +11,7 @@ usage() {
         $ $0 -v|--verbose       run script in verbose mode"
 
 }
+test -t 1 && USE_TTY="-it"
 #OUTDIR is bind mopunted and will contain the compiled output from the container
 OUTDIR='output'
 MPU="rzg2l"
@@ -61,9 +62,7 @@ then
 else
 	CONTNAME="$(whoami)-rzg2l_vlp_v3.0.0"
 fi
-#Create OUTDIR if iot doesn't exist
-#echo "VERBOSE: ${VERBOSE} NO: ${NO}"
-#exit
+#Create OUTDIR if it doesn't exist
 if [ ! -d "${OUTDIR}" ];
 then
 	mkdir ${OUTDIR}
