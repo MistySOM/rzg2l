@@ -36,5 +36,6 @@ COPY exec.sh /home/yocto/
 COPY start.sh /home/yocto/
 # copy mist-som layer from the submodule 
 COPY --chown=yocto:yocto meta-mistysom /home/yocto/rzg_vlp_v3.0.0/meta-mistysom
+COPY --chown=yocto:yocto meta-econsys /home/yocto/rzg_vlp_v3.0.0/meta-econsys
 
 CMD ["/home/yocto/exec.sh"]

@@ -48,6 +48,7 @@ then
 fi
 #addition of meta-mistysom layer to bblayers.conf
 sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' ${WORK}/build/conf/bblayers.conf
+sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-econsys \\/' ${WORK}/build/conf/bblayers.conf
 
 # add dunfell compatibility to layers wehre they're missing to avoid WARNING
 echo "LAYERSERIES_COMPAT_qt5-layer = \"dunfell\"" >> ${YOCTODIR}/meta-qt5/conf/layer.conf
