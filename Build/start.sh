@@ -41,6 +41,8 @@ NUM_CPU=$(((mem+swp)/1000/1000/4))
 sed -i "1 i\PARALLEL_MAKE = \"-j ${NUM_CPU}\"\nBB_NUMBER_THREADS = \"${NUM_CPU}\"" ${LOCALCONF}
 # Comment out the line that flags GPLv3 as an incompatible license
 sed -i '/^INCOMPATIBLE_LICENSE = \"GPLv3 GPLv3+\"/ s/./#&/' ${LOCALCONF}
+# append hostname to local.conf
+echo "hostname_pn-base-files = \"MistySOM\"" >> ${LOCALCONF}
 #build offline tools, without network access
 if [ -z $DLOAD ];
 then
