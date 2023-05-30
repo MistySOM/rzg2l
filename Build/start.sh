@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 #Check hostname is a hexadecimal number of 12 
+SOMHOSTNAME="MistySOM-G2L"
 LOCALCONF="/home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf"
 YOCTODIR="/home/yocto/rzg_vlp_v3.0.0/"
 hname=`hostname | egrep -o '^[0-9a-f]{12}\b'`
@@ -42,7 +43,7 @@ sed -i "1 i\PARALLEL_MAKE = \"-j ${NUM_CPU}\"\nBB_NUMBER_THREADS = \"${NUM_CPU}\
 # Comment out the line that flags GPLv3 as an incompatible license
 sed -i '/^INCOMPATIBLE_LICENSE = \"GPLv3 GPLv3+\"/ s/./#&/' ${LOCALCONF}
 # append hostname to local.conf
-echo "hostname_pn-base-files = \"MistySOM\"" >> ${LOCALCONF}
+echo "hostname_pn-base-files = \"${SOMHOSTNAME}\"" >> ${LOCALCONF}
 #build offline tools, without network access
 if [ -z $DLOAD ];
 then
