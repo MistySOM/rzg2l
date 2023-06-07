@@ -27,13 +27,8 @@ echo "    CONFIGURATION COPIED TO conf/"
 if [ -z $DLOAD ];
 then
 	cd $WORK/build
-	7z x ~/oss_pkg_rzv_v3.0.0.7z
+	7z x ~/oss_pkg_v3.0.0.7z
 fi
-##Apply DRPAI patch
-echo "IMAGE_INSTALL_append = \" gstreamer1.0-drpai ai-eva-sw\"" >> ${WORK}/meta-mistysom/recipes-core/images/mistysom-image.bbappend
-#echo "applying drpai patch"
-#patch -p2 < ../rzg2l-drpai-conf.patch
-#echo "drpai patch applied"
 swp=`cat /proc/meminfo | grep "SwapTotal"|awk '{print $2}'`
 mem=`cat /proc/meminfo | grep "MemTotal"|awk '{print $2}'`
 NUM_CPU=$(((mem+swp)/1000/1000/4))
@@ -62,5 +57,5 @@ echo "    ------------------------------------------------
     'cd ${WORK}'
     'source poky/oe-init-build-env'
     'bitbake mistysom-image'"
-cd ~/rzv_vlp_v3.0.0
+cd ~/rzg_vlp_v3.0.0
 
