@@ -73,7 +73,7 @@ then
 fi
 if [ -z "${CPATH}" ]; 
 then
-  /usr/bin/docker run --privileged ${USE_TTY} --rm -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzv_vlp_v3.0.0/out --name ${CONTNAME} ${CONTNAME}
+  /usr/bin/docker run --privileged ${USE_TTY} --rm -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out --name ${CONTNAME} ${CONTNAME}
 else
 	#Create CPATH sub directories if they do not exist
 	mkdir -p ${CPATH}/downloads
@@ -86,5 +86,5 @@ else
 		echo "Unable to obtain write permissions to ${CPATH} and its sub directories, edit the permissions of ${CPATH} accordingly! exit"
 		exit -1
 	fi
-	/usr/bin/docker run --privileged ${USE_TTY} --rm -v "${PWD}/${OUTDIR}":/home/yocto/rzv_vlp_v3.0.0/out -v "${CPATH}/downloads":/home/yocto/rzv_vlp_v3.0.0/build/downloads -v "${CPATH}/sstate-cache":/home/yocto/rzv_vlp_v3.0.0/build/sstate-cache -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} --name ${CONTNAME} ${CONTNAME}
+	/usr/bin/docker run --privileged ${USE_TTY} --rm -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out -v "${CPATH}/downloads":/home/yocto/rzg_vlp_v3.0.0/build/downloads -v "${CPATH}/sstate-cache":/home/yocto/rzg_vlp_v3.0.0/build/sstate-cache -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} --name ${CONTNAME} ${CONTNAME}
 fi
