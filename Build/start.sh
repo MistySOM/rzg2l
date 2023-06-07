@@ -2,8 +2,7 @@
 set -e
 #Check hostname is a hexadecimal number of 12 
 SOMHOSTNAME="MistySOM-G2L"
-LOCALCONF="/home/yocto/rzg_vlp_v3.0.0/build/conf/local.conf"
-YOCTODIR="/home/yocto/rzg_vlp_v3.0.0/"
+LOCALCONF="${WORK}/build/conf/local.conf"
 hname=`hostname | egrep -o '^[0-9a-f]{12}\b'`
 echo $hname
 len=${#hname}
@@ -28,9 +27,10 @@ echo "    CONFIGURATION COPIED TO conf/"
 if [ -z $DLOAD ];
 then
 	cd $WORK/build
-	7z x ~/oss_pkg_v3.0.0.7z
+	7z x ~/oss_pkg_rzv_v3.0.0.7z
 fi
 ##Apply DRPAI patch
+echo "IMAGE_INSTALL_append = \" gstreamer1.0-drpai ai-eva-sw\"" >> ${WORK}/meta-mistysom/recipes-core/images/mistysom-image.bbappend
 #echo "applying drpai patch"
 #patch -p2 < ../rzg2l-drpai-conf.patch
 #echo "drpai patch applied"
@@ -53,14 +53,14 @@ fi
 sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' ${WORK}/build/conf/bblayers.conf
 
 # add dunfell compatibility to layers wehre they're missing to avoid WARNING
-echo "LAYERSERIES_COMPAT_qt5-layer = \"dunfell\"" >> ${YOCTODIR}/meta-qt5/conf/layer.conf
-echo "LAYERSERIES_COMPAT_rz-features = \"dunfell\"" >> ${YOCTODIR}/meta-rz-features/conf/layer.conf
+echo "LAYERSERIES_COMPAT_qt5-layer = \"dunfell\"" >> ${WORK}/meta-qt5/conf/layer.conf
+echo "LAYERSERIES_COMPAT_rz-features = \"dunfell\"" >> ${WORK}/meta-rz-features/conf/layer.conf 
 
 echo "    ------------------------------------------------
     SETUP SCRIPT BUILD ENVIRONMENT SETUP SUCCESSFUL!
     run the following commands to start the build:
-    'cd ~/rzg_vlp_v3.0.0/'
+    'cd ${WORK}'
     'source poky/oe-init-build-env'
     'bitbake mistysom-image'"
-cd ~/rzg_vlp_v3.0.0
+cd ~/rzv_vlp_v3.0.0
 
