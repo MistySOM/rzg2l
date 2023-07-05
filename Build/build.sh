@@ -1,6 +1,4 @@
 #!/bin/bash
-git submodule sync
-git submodule update --init --recursive
 if [ "$1" == "-b" ]; then
 	IMAGE_NAME="$(whoami)-rzg2l_vlp_v3.0.0_$(git branch --show-current)"
 else

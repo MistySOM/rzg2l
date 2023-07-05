@@ -1,4 +1,4 @@
-name: Build Yocto Image
+name: Test and Upload Yocto Image
 
 on:
   push:
@@ -10,8 +10,35 @@ on:
   workflow_dispatch:
     
 jobs:
+  check-submodule:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Assign variable based on branch name
+        run: |
+          target_branch=${{ github.base_ref }}
+          # Set another value if the variable is empty
+          target_branch="${target_branch:-${{ github.ref_name }}}"
+          
+          echo "The target branch is: $target_branch"
+
+          # Set the value of the environment variable with the same name as the variable
+          echo "target_branch=$target_branch" >> $GITHUB_ENV
+          
+      - name: 'Check Submodule Branch'
+        uses: jtmullen/submodule-branch-check-action@v1.2.2
+        with:
+          path: Build/meta-mistysom
+          branch: ${{ env.target_branch }}
+          require_head: true
+
   build-yocto:
     runs-on: self-hosted
+    needs: check-submodule
     
     steps:
     - uses: actions/checkout@v3
@@ -19,7 +46,7 @@ jobs:
     - name: Build the Docker image
       run: cd Build && ./build.sh; 
     
-    - name: Run the Docker image and build output files with SDK
+    - name: Run the Docker container and build output files
       run: cd Build && ./run.sh -c /home/github/rzg2l-cache;
       
     - name: Upload artifacts
