@@ -50,6 +50,7 @@ cat <<EOT >> ${LOCALCONF}
 
 BBMASK += "/meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/openssl"
 BBMASK += "/meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/.*/.*openssl10.*"
+BBMASK += "/meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/summit-supplicant"
 PREFERRED_RPROVIDER_wpa-supplicant = "sterling-supplicant-lwb"
 PREFERRED_RPROVIDER_wpa-supplicant-cli = "sterling-supplicant-lwb"
 PREFERRED_RPROVIDER_wpa-supplicant-passphrase = "sterling-supplicant-lwb"
