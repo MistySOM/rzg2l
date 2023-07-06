@@ -49,8 +49,8 @@ fi
 cat <<EOT >> ${LOCALCONF}
 
 BBMASK += " \\
-    meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/openssl \\
-    meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/.*/.*openssl10.* \\
+    ../meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/openssl \\
+    ../meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/.*/.*openssl10.* \\
 "
 PREFERRED_RPROVIDER_wpa-supplicant = "sterling-supplicant-lwb"
 PREFERRED_RPROVIDER_wpa-supplicant-cli = "sterling-supplicant-lwb"
