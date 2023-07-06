@@ -48,10 +48,8 @@ fi
 #Add configuration details for Laird LWB5+ module according to: https://github.com/LairdCP/meta-summit-radio/tree/lrd-10.0.0.x/meta-summit-radio-pre-3.4
 cat <<EOT >> ${LOCALCONF}
 
-BBMASK += " \\
-    ../meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/openssl \\
-    ../meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/.*/.*openssl10.* \\
-"
+BBMASK += "/meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/openssl"
+BBMASK += "/meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/.*/.*openssl10.*"
 PREFERRED_RPROVIDER_wpa-supplicant = "sterling-supplicant-lwb"
 PREFERRED_RPROVIDER_wpa-supplicant-cli = "sterling-supplicant-lwb"
 PREFERRED_RPROVIDER_wpa-supplicant-passphrase = "sterling-supplicant-lwb"
