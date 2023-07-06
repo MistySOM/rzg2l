@@ -44,12 +44,31 @@ if [ -z $DLOAD ];
 then
 	sed -i 's/BB_NO_NETWORK = "0"/BB_NO_NETWORK = "1"/g' ${LOCALCONF}
 fi
-#addition of meta-mistysom layer to bblayers.conf
-sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\/' ${WORK}/build/conf/bblayers.conf
 
-# add dunfell compatibility to layers wehre they're missing to avoid WARNING
+#Add configuration details for Laird LWB5+ module according to: https://github.com/LairdCP/meta-summit-radio/tree/lrd-10.0.0.x/meta-summit-radio-pre-3.4
+cat <<EOT >> ${LOCALCONF}
+PREFERRED_RPROVIDER_wpa-supplicant = "sterling-supplicant-lwb"
+PREFERRED_RPROVIDER_wpa-supplicant-cli = "sterling-supplicant-lwb"
+PREFERRED_RPROVIDER_wpa-supplicant-passphrase = "sterling-supplicant-lwb"
+PREFERRED_RPROVIDER_wireless-regdb-static = "wireless-regdb"
+EOT
+
+#addition of meta-mistysom & mistylwb5p layers to bblayers.conf
+sed -i 's/renesas \\/&\n'\
+'  ${TOPDIR}\/..\/meta-mistysom \\\n'\
+'  ${TOPDIR}\/..\/meta-mistylwb5p\/meta-summit-radio-pre-3.4 \\\n'\
+'  ${TOPDIR}\/..\/meta-openembedded\/meta-networking \\'\
+'/' ${WORK}/build/conf/bblayers.conf
+
+# Disable recipes, tried BBMASK but was not working
+rm -rf ${WORK}/meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/openssl
+rm -rf ${WORK}/meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/summit-*
+rm -rf ${WORK}/meta-virtualization
+
+# add dunfell compatibility to layers where they're missing to avoid WARNING
 echo "LAYERSERIES_COMPAT_qt5-layer = \"dunfell\"" >> ${WORK}/meta-qt5/conf/layer.conf
 echo "LAYERSERIES_COMPAT_rz-features = \"dunfell\"" >> ${WORK}/meta-rz-features/conf/layer.conf 
+echo "LAYERSERIES_COMPAT_summit-radio-pre-3.4 = \"dunfell\"" >> ${WORK}/meta-mistylwb5p/meta-summit-radio-pre-3.4/conf/layer.conf
 
 echo "    ------------------------------------------------
     SETUP SCRIPT BUILD ENVIRONMENT SETUP SUCCESSFUL!

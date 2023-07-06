@@ -1,3 +1,6 @@
 [submodule "Build/meta-mistysom"]
 	path = Build/meta-mistysom
 	url = https://github.com/MistySOM/meta-mistysom.git
+[submodule "Build/meta-mistylwb5p"]
+	path = Build/meta-mistylwb5p
+	url = https://github.com/MistySOM/meta-mistylwb5p.git
