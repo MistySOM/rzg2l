@@ -49,21 +49,22 @@ fi
 cat <<EOT >> ${LOCALCONF}
 
 BBMASK += " \\
-            meta-summit-radio-pre-3.4/recipes-packages/openssl \\
-            meta-summit-radio-pre-3.4/recipes-packages/.*/.*openssl10.* \\
+    meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/openssl \\
+    meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/.*/.*openssl10.* \\
 "
-PREFERRED_RPROVIDER_wpa-supplicant = "sterling-supplicant"
-PREFERRED_RPROVIDER_wpa-supplicant-cli = "sterling-supplicant"
-PREFERRED_RPROVIDER_wpa-supplicant-passphrase = "sterling-supplicant"
+PREFERRED_RPROVIDER_wpa-supplicant = "sterling-supplicant-lwb"
+PREFERRED_RPROVIDER_wpa-supplicant-cli = "sterling-supplicant-lwb"
+PREFERRED_RPROVIDER_wpa-supplicant-passphrase = "sterling-supplicant-lwb"
 PREFERRED_RPROVIDER_wireless-regdb-static = "wireless-regdb"
 
 EOT
 #addition of meta-mistysom & mistylwb5p layers to bblayers.conf
 sed -i 's/renesas \\/&\n  ${TOPDIR}\/..\/meta-mistysom \\\n  ${TOPDIR}\/..\/meta-mistylwb5p\/meta-summit-radio-pre-3.4 \\/' /home/yocto/rzg_vlp_v3.0.0/build/conf/bblayers.conf
 
-# add dunfell compatibility to layers wehre they're missing to avoid WARNING
+# add dunfell compatibility to layers where they're missing to avoid WARNING
 echo "LAYERSERIES_COMPAT_qt5-layer = \"dunfell\"" >> ${WORK}/meta-qt5/conf/layer.conf
 echo "LAYERSERIES_COMPAT_rz-features = \"dunfell\"" >> ${WORK}/meta-rz-features/conf/layer.conf 
+echo "LAYERSERIES_COMPAT_summit-radio-pre-3.4 = \"dunfell\"" >> ${WORK}/meta-mistylwb5p/meta-summit-radio-pre-3.4/conf/layer.conf
 
 echo "    ------------------------------------------------
     SETUP SCRIPT BUILD ENVIRONMENT SETUP SUCCESSFUL!
