@@ -4,3 +4,6 @@
 [submodule "Build/meta-econsys"]
 	path = Build/meta-econsys
 	url = https://github.com/MistySOM/meta-econsys.git
+[submodule "Build/meta-mistylwb5p"]
+	path = Build/meta-mistylwb5p
+	url = https://github.com/MistySOM/meta-mistylwb5p.git
