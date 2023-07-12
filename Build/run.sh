@@ -57,7 +57,7 @@ while [[ $# -gt 0 ]]; do
 done
 CONTNAME="$(whoami)-rzg2l_vlp_v3.0.0${BRANCH}"
 if [ ! -z ${VERBOSE} ]; then
-  IGNORE_OUTPUT="2>/dev/null"
+  IGNORE_OUTPUT="2>&1 1>/dev/null"
 fi
 #Create OUTDIR if it doesn't exist
 if [ ! -d "${OUTDIR}" ];
@@ -79,7 +79,7 @@ else
 	mkdir -p ${CPATH}/downloads
 	mkdir -p ${CPATH}/sstate-cache/${MPU}
 
-	chmod -R +w ${CPATH}
+	chmod -R +w ${CPATH} ${IGNORE_OUTPUT}
 	ret=$?
 	if [ $ret -ne 0 ];
 	then
