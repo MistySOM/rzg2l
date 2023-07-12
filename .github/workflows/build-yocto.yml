@@ -36,13 +36,6 @@ jobs:
           branch: ${{ env.target_branch }}
           require_head: true
 
-      - name: 'Check meta-mistylwb5p Submodule Branch'
-        uses: jtmullen/submodule-branch-check-action@v1.2.2
-        with:
-          path: Build/meta-mistylwb5p
-          branch: ${{ env.target_branch }}
-          require_head: true
-
       - name: 'Check meta-econsys Submodule Branch'
         uses: jtmullen/submodule-branch-check-action@v1.2.2
         with:
