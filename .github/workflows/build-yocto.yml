@@ -29,10 +29,17 @@ jobs:
           # Set the value of the environment variable with the same name as the variable
           echo "target_branch=$target_branch" >> $GITHUB_ENV
           
-      - name: 'Check Submodule Branch'
+      - name: 'Check meta-mistysom Submodule Branch'
         uses: jtmullen/submodule-branch-check-action@v1.2.2
         with:
           path: Build/meta-mistysom
+          branch: ${{ env.target_branch }}
+          require_head: true
+
+      - name: 'Check meta-econsys Submodule Branch'
+        uses: jtmullen/submodule-branch-check-action@v1.2.2
+        with:
+          path: Build/meta-econsys
           branch: ${{ env.target_branch }}
           require_head: true
 
@@ -57,4 +64,6 @@ jobs:
         path: |
           Build/output/images/smarc-rzg2l/Image-smarc-rzg2l.bin
           Build/output/images/smarc-rzg2l/r9a07g044l2-smarc.dtb
+          Build/output/images/smarc-rzg2l/r9a07g044l2-smarc-ar0234.dtb
+          Build/output/images/smarc-rzg2l/r9a07g044l2-smarc-imx462.dtb
           Build/output/images/smarc-rzg2l/mistysom-image-smarc-rzg2l.tar.bz2

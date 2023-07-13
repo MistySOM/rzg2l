@@ -38,5 +38,6 @@ COPY start.sh /home/yocto/
 COPY --chown=yocto:yocto meta-mistysom /home/yocto/rzg_vlp_v3.0.0/meta-mistysom
 COPY --chown=yocto:yocto meta-mistylwb5p/ /home/yocto/rzg_vlp_v3.0.0/meta-mistylwb5p
 COPY --chown=yocto:yocto meta-mistyintel-realsense/ /home/yocto/rzg_vlp_v3.0.0/meta-mistyintel-realsense
+COPY --chown=yocto:yocto meta-econsys /home/yocto/rzg_vlp_v3.0.0/meta-econsys
 
 CMD ["/home/yocto/exec.sh"]

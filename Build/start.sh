@@ -56,6 +56,7 @@ EOT
 #addition of meta-mistysom & mistylwb5p layers to bblayers.conf
 sed -i 's/renesas \\/&\n'\
 '  ${TOPDIR}\/..\/meta-mistysom \\\n'\
+'  ${TOPDIR}\/..\/meta-econsys \\\n'\
 '  ${TOPDIR}\/..\/meta-mistylwb5p\/meta-summit-radio-pre-3.4 \\\n'\
 '  ${TOPDIR}\/..\/meta-openembedded\/meta-networking \\\n'\
 '  ${TOPDIR}\/..\/meta-mistyintel-realsense \\'\
