@@ -57,8 +57,23 @@ EOT
 sed -i 's/renesas \\/&\n'\
 '  ${TOPDIR}\/..\/meta-mistysom \\\n'\
 '  ${TOPDIR}\/..\/meta-mistylwb5p\/meta-summit-radio-pre-3.4 \\\n'\
-'  ${TOPDIR}\/..\/meta-openembedded\/meta-networking \\'\
+'  ${TOPDIR}\/..\/meta-openembedded\/meta-networking \\\n'\
+'  ${TOPDIR}\/..\/meta-mistyintel-realsense \\'\
 '/' ${WORK}/build/conf/bblayers.conf
+
+#addition of realsense related contents to conf/auto.conf
+echo "CORE_IMAGE_EXTRA_INSTALL += \"librealsense2 librealsense2-tools\"
+# Optional
+CORE_IMAGE_EXTRA_INSTALL += \"librealsense2-debug-tools\"
+
+CORE_IMAGE_EXTRA_INSTALL += \"librealsense2-examples\"
+#CORE_IMAGE_EXTRA_INSTALL += \"librealsense2-graphical-examples\"
+
+# Python 2.x
+#CORE_IMAGE_EXTRA_INSTALL += \"python-pyrealsense2\"
+
+# Python 3.x
+CORE_IMAGE_EXTRA_INSTALL += \"python3-pyrealsense2\"" >> ${WORK}/build/conf/auto.conf
 
 # Disable recipes, tried BBMASK but was not working
 rm -rf ${WORK}/meta-mistylwb5p/meta-summit-radio-pre-3.4/recipes-packages/openssl

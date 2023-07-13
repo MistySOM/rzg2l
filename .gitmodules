@@ -4,3 +4,6 @@
 [submodule "Build/meta-mistylwb5p"]
 	path = Build/meta-mistylwb5p
 	url = https://github.com/MistySOM/meta-mistylwb5p.git
+[submodule "Build/meta-mistyintel-realsense"]
+	path = Build/meta-mistyintel-realsense
+	url = https://github.com/MistySOM/meta-mistyintel-realsense.git
