@@ -70,9 +70,6 @@ CORE_IMAGE_EXTRA_INSTALL += \"librealsense2-debug-tools\"
 CORE_IMAGE_EXTRA_INSTALL += \"librealsense2-examples\"
 #CORE_IMAGE_EXTRA_INSTALL += \"librealsense2-graphical-examples\"
 
-# Python 2.x
-#CORE_IMAGE_EXTRA_INSTALL += \"python-pyrealsense2\"
-
 # Python 3.x
 CORE_IMAGE_EXTRA_INSTALL += \"python3-pyrealsense2\"" >> ${WORK}/build/conf/auto.conf
 
