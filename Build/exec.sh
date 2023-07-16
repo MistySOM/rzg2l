@@ -2,15 +2,26 @@
 set -e
 #Check hostname is a hexadecimal number of 12 
 hname=`hostname | egrep -o '^[0-9a-f]{12}\b'`
+OUTDIR=$WORK/out
 echo $hname
 len=${#hname}
-if [ "$len" -eq 12 ];
+if [[ ! "$len" -eq 12 ]];
 then 
-	:
-else
     echo "ERROR: this script needs to be run inside the Yocto build container!"
     exit
 fi
+if [[ ! -w ${OUTDIR} ]];
+then
+	echo "Unable to obtain full acess  permissions to 'output' and its sub directories, edit the permissions of 'output' accordingly! exit"
+	exit -1
+fi
+if [[ ! -w $WORK/build/sstate-cache || ! -w $WORK/build/downloads ]];
+then
+	echo "Unable to obtain write permissions to `cache` and its sub directories, edit the permissions of `cache` accordingly! exit"
+	exit -1
+fi
+
+
 ./start.sh
 if [ -z $NO ];
 then
@@ -20,12 +31,12 @@ then
 	then
 		time bitbake mistysom-image
 		echo "copying compiled images into 'out/'"
-		cp -r /home/yocto/rzg_vlp_v3.0.0/build/tmp/deploy/images/ /home/yocto/rzg_vlp_v3.0.0/out/
+		cp -r $WORK/build/tmp/deploy/images/ ${OUTDIR}
 	else
 		time sh -c "bitbake mistysom-image && bitbake mistysom-image -c populate_sdk"
 		echo "copying compiled images & SDK directories into 'out/'"
-		cp -r /home/yocto/rzg_vlp_v3.0.0/build/tmp/deploy/sdk/ /home/yocto/rzg_vlp_v3.0.0/out/
-		cp -r /home/yocto/rzg_vlp_v3.0.0/build/tmp/deploy/images/ /home/yocto/rzg_vlp_v3.0.0/out/
+		cp -r $WORK/build/tmp/deploy/sdk/ ${OUTDIR}
+		cp -r $WORK/build/tmp/deploy/images/ ${OUTDIR}
 	fi
 else
 	/bin/bash
