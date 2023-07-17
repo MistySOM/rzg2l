@@ -60,10 +60,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: output-files
-        path: |
-          Build/output/images/smarc-rzg2l/Image-smarc-rzg2l.bin
-          Build/output/images/smarc-rzg2l/r9a07g044l2-smarc.dtb
-          Build/output/images/smarc-rzg2l/r9a07g044l2-smarc-ar0234.dtb
-          Build/output/images/smarc-rzg2l/r9a07g044l2-smarc-imx462.dtb
-          Build/output/images/smarc-rzg2l/mistysom-image-smarc-rzg2l.tar.bz2
+        name: output-image
+        path: rzg2l/Build/output/images/smarc-rzg2l/mistysom-image-smarc-rzg2l.wic.bz2
