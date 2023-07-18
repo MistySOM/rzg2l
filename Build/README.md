@@ -52,8 +52,8 @@ The files in the abbove `images` directory include:
 | Description | Filename |
 |--------------|------------------------|
 | Linux kernel | `Image-smarc-rzg2l.bin` |
-| Device tree file |`r9a07g05l2-smarc.dtb` |
-| Root filesystem | `<image-name>-smarc-rzg2l.tar.bz2` |
+| Device tree file |`r9a07g04l2-smarc.dtb` |
+| Partitioned Image | `<image-name>-smarc-rzg2l.wic.bz2` |
 | Boot Loader |`bl2_bp-smarc-rzg2l_pmic.srec` & `fip-smarc-rzg2l_pmic.srec` |
 | FlashWriter |`Flash_Writer_SCIF_RZV2L_SMARC_PMIC_DDR4_2GB_1PCS.mot` |
 
