@@ -28,12 +28,12 @@ jobs:
       - name: Merge into master
         if: steps.check_review_status.outputs.review_requests == ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
             gh pr merge ${{ github.event.pull_request.number }} -m
 
       - name: Fast-Forward develop
         if: steps.check_review_status.outputs.review_requests == ''
         run: |
-            git merge origin/master --ff-only
-            git push
+            git reset --hard origin/master
+            git push --force
