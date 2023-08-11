@@ -5,6 +5,18 @@ on:
     branches: [master]
 
 jobs:
+  fast-forward-develop:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Fast-Forward develop
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT2 }}
+        run: |
+            git push --force origin/develop
+
   release-submittion:
     runs-on: ubuntu-latest
     permissions:
