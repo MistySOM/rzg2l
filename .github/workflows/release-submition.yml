@@ -2,7 +2,7 @@ name: Release Submition
 
 on:
     workflow_run:
-        workflows: ["Build Yocto Image"]
+        workflows: ["Test and Build Yocto Image"]
         branches: [master]
         types:
             - completed
