@@ -1,4 +1,4 @@
-name: Release Submition
+name: Release Submission
 
 on:
     workflow_run:
@@ -23,7 +23,7 @@ jobs:
             git merge origin/master
             git push --force origin HEAD:develop
 
-  release-submittion:
+  release-submission:
     runs-on: DC02
     permissions:
       contents: write
