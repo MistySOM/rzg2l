@@ -1,12 +1,12 @@
-name: Test and Upload Yocto Image
+name: Test and Build Yocto Image
 
 on:
   push:
     branches: [ "master", "develop" ]
-    paths-ignore: [ '*.md', '*.pdf', '*.yml' ]
+    paths-ignore: [ '**.md', '**.pdf', '**.yml' ]
   pull_request:
     branches: [ "master", "develop" ]
-    paths-ignore: [ '*.md', '*.pdf', '*.yml' ]
+    paths-ignore: [ '**.md', '**.pdf', '**.yml' ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -51,13 +51,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        submodules: true
+        submodules: recursive
     
     - name: Build the Docker image
       run: cd Build && ./build.sh; 
     
     - name: Run the Docker container and build output files
-      run: cd Build && ./run.sh -c /home/github/rzg2l-cache;
+      run: |
+        cd Build
+        ./run.sh -c /home/github/rzg2l-cache
+        cp output/images/smarc-rzv2l/*.wic.bz2 /home/github
       
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
