@@ -60,7 +60,7 @@ jobs:
       run: |
         cd Build
         ./run.sh -c /home/github/rzg2l-cache
-        cp output/images/smarc-rzv2l/*.wic.bz2 /home/github
+        cp output/images/smarc-rzg2l/*.wic.bz2 /home/github
       
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
