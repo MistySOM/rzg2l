@@ -57,7 +57,7 @@ EOT
 sed -i 's/renesas \\/&\n'\
 '  ${TOPDIR}\/..\/meta-mistysom \\\n'\
 '  ${TOPDIR}\/..\/meta-econsys \\\n'\
-'  ${TOPDIR}\/..\/meta-mistylwb5p\/meta-summit-radio-pre-3.4 \\\n'\
+'  ${TOPDIR}\/..\/meta-mistylwb5p\/meta-summit-radio-pre-3.4 \\'\
 '/' ${WORK}/build/conf/bblayers.conf
 
 # Disable recipes, tried BBMASK but was not working
