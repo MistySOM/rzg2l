@@ -58,6 +58,7 @@ done
 CONTNAME="$(whoami)-rzg2l_vlp_v3.0.0${BRANCH}"
 #Create OUTDIR if it doesn't exist
 mkdir -p ${OUTDIR}
+chmod 777 ${OUTDIR}
 if [ -z "${CPATH}" ]; 
 then
   /usr/bin/docker run --privileged ${USE_TTY} --rm -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out --name ${CONTNAME} ${CONTNAME}
