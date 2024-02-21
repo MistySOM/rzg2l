@@ -20,15 +20,11 @@ then
 	echo "Unable to obtain full acess  permissions to 'output' and its sub directories, edit the permissions of 'output' accordingly! exit"
 	exit -1
 fi
-echo "WORK ${WORK}"
-#if [[ ! -w $WORK/build/sstate-cache || ! -w $WORK/build/downloads ]];
 if [[ -d $WORK/build/sstate-cache && -d $WORK/build/downloads && (! -w $WORK/build/sstate-cache || ! -w $WORK/build/downloads) ]];
-
 then
 	echo "Unable to obtain write permissions to 'cache' and its sub directories, edit the permissions of 'cache' accordingly! exit"
 	exit -1
 fi
-
 
 ./start.sh
 if [ -z $NO ];
