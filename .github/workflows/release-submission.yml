@@ -1,0 +1,47 @@
+name: Release Submission
+
+on:
+    workflow_run:
+        workflows: ["Test and Build Yocto Image"]
+        branches: [master]
+        types:
+            - completed
+
+jobs:
+  release-submission:
+    runs-on: DC02
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Generate Tag
+      id: generate_tag
+      run: |
+        tag=$(git describe --tags --abbrev=0)
+        IFS='.' read -ra parts <<< "$tag"
+        last_part=${parts[-1]}
+        last_part=$((last_part + 1))
+        parts[-1]=$last_part
+        new_tag=$(IFS='.'; echo "${parts[*]}")
+        echo "old_tag=$tag" >> $GITHUB_OUTPUT
+        echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
+
+    - name: Remove duplicate release
+      continue-on-error: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT2 }}
+      run: |
+        gh release delete ${{ steps.generate_tag.outputs.new_tag }} --yes --cleanup-tag
+
+    - name: Create Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT2 }}
+      run: |
+        gh release create \
+            --draft --generate-notes --latest \
+            --notes-start-tag ${{ steps.generate_tag.outputs.old_tag }} \
+            ${{ steps.generate_tag.outputs.new_tag }} \
+            "/home/github/mistysom-image-smarc-rzg2l.wic.bz2"

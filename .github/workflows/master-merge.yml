@@ -1,0 +1,33 @@
+name: Merge master if all reviews are approved
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  merge_job:
+    name: Merge Master Job
+    if: github.event.pull_request.base.ref == 'master' && github.event.review.state == 'approved'  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+            ref: develop
+            fetch-depth: 0
+
+      - name: Check Review Status
+        id: check_review_status
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT2 }}
+        run: |
+            r=$(gh pr view ${{ github.event.pull_request.number }} --json reviewRequests -q ".reviewRequests.[]")
+            echo "review_requests=$r" >> $GITHUB_OUTPUT
+
+      - name: Merge into master
+        if: steps.check_review_status.outputs.review_requests == ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT2 }}
+        run: |
+            gh pr merge ${{ github.event.pull_request.number }} -m --auto

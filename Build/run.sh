@@ -32,7 +32,6 @@ while [[ $# -gt 0 ]]; do
       ;;
       -c|--cpath)
         CPATH="$2"
-	DLOAD="1"
         shift #past argument
         shift #past value
       ;;
@@ -58,12 +57,13 @@ done
 CONTNAME="$(whoami)-rzg2l_vlp_v3.0.0${BRANCH}"
 #Create OUTDIR if it doesn't exist
 mkdir -p ${OUTDIR}
+chmod 777 ${OUTDIR}
 if [ -z "${CPATH}" ]; 
 then
-  /usr/bin/docker run --privileged ${USE_TTY} --rm -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out --name ${CONTNAME} ${CONTNAME}
+  /usr/bin/docker run --privileged ${USE_TTY} --rm -e NO=${NO} -e SDK=${SDK} -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out --name ${CONTNAME} ${CONTNAME}
 else
 	#Create CPATH sub directories if they do not exist
-	mkdir -p ${CPATH}/downloads
-	mkdir -p ${CPATH}/sstate-cache/${MPU}
-	/usr/bin/docker run --privileged ${USE_TTY} --rm -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out -v "${CPATH}/downloads":/home/yocto/rzg_vlp_v3.0.0/build/downloads -v "${CPATH}/sstate-cache/${MPU}/":/home/yocto/rzg_vlp_v3.0.0/build/sstate-cache -e NO=${NO} -e SDK=${SDK} -e DLOAD=${DLOAD} --name ${CONTNAME} ${CONTNAME}
+	mkdir -p -m777 ${CPATH}/downloads
+	mkdir -p -m777 ${CPATH}/sstate-cache/${MPU}
+	/usr/bin/docker run --privileged ${USE_TTY} --rm -v "${PWD}/${OUTDIR}":/home/yocto/rzg_vlp_v3.0.0/out -v "${CPATH}/downloads":/home/yocto/rzg_vlp_v3.0.0/build/downloads -v "${CPATH}/sstate-cache/${MPU}/":/home/yocto/rzg_vlp_v3.0.0/build/sstate-cache -e NO=${NO} -e SDK=${SDK} --name ${CONTNAME} ${CONTNAME}
 fi
