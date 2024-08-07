@@ -30,6 +30,10 @@ echo "    CONFIGURATION COPIED TO conf/"
 sed -i '/^INCOMPATIBLE_LICENSE = \"GPLv3 GPLv3+\"/ s/./#&/' ${LOCALCONF}
 # append hostname to local.conf
 echo "hostname_pn-base-files = \"${SOMHOSTNAME}\"" >> ${LOCALCONF}
+# Set default root password
+echo "INHERIT += \"extrausers\"" >> ${LOCALCONF}
+echo "EXTRA_USERS_PARAMS = \"usermod -P root root\"" >> ${LOCALCONF}
+
 
 #Add configuration details for Laird LWB5+ module according to: https://github.com/LairdCP/meta-summit-radio/tree/lrd-10.0.0.x/meta-summit-radio-pre-3.4
 cat <<EOT >> ${LOCALCONF}
